@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
+        <title>Tombola</title>
+        <link type="text/css" rel="stylesheet" href="style.css" />
+         <xml id="XML_Smorfie" src="smorfie.xml"></xml>
+    </head>
+    <body onload="init();">
+        <div id="main">
+            <div id="testa">
+                <div id="titolo"></div>
+                <div id="config">
+                    <p onClick="NascondiMenu();"><img src="settings.png" alt="impostazioni"></p>
+                    <div id="menu_config">
+                        <p>
+                            <form name="f1">
+                                Titolo:              <input id="set_title" type="text" /> <br />
+                                Colore Titolo:       <input id="col_title" type="text" /> <br />
+                                Colore sfondo:       <input id="body_bg_col" type="text" /> <br />
+                                Sfondo celle:        <input id="td_bg_col" type="text" /> <br />
+                                Sfondo celle selez.: <input id="std_bg_col" type="text" /> <br />
+                                Colore Testo:        <input id="col_text" type="text" /> <br /><br />
+                                Smorfie napoletane:  <input id="check_smorfia" type="checkbox" /> <br />
+                                <br />
+                                <input type="button" onClick="Saveconfig();" value="Salva" />
+                            </form>
+                        </p>
+                    </div>
+                </div>
+                <div id="estratto"></div>
+            </div>
+            <div id="tabellone"></div>
+            <div id="premio" OnClick='NextPremio();'></div>
+            <div id="div_smorfie">
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
+<!-- JAVASCRIPT -->
+<script>
+    var body_bg = "rgb(255,255,255)";
+    var bg_ini = "rgb(255, 255, 255)";
+    var bg_sel = "rgb(255, 238, 0)";
+    var txt_col = "rgb(0, 0, 0)";
+    var title_col = "rgb(0, 0, 0)";
+    var ip = -1;
+    var title = "Tombola!"
+    var smorfie = false;
+
+    function NascondiMenu() {
+        var e = document.getElementById("menu_config");
+        if (e.style.visibility == 'hidden') {
+            e.style.visibility = 'visible';
+            e.style.display = 'block';
+        } else {
+            e.style.visibility = 'hidden';
+            e.style.display = 'none';
+        }
+    }
+
+    function init() {
+        var e = document.getElementById("tabellone");
+        var righe = 9;
+        var colonne = 10;
+        var output = "<table>";
+        for (i=0; i<righe; i++) {
+            output += "<tr>";
+            for (j=1; j<=colonne; j++) {
+                var n = i*10+j;
+                output += "<td id='"+ n +"' OnClick='ChangeColor(\""+n+"\")'>"+ n +"</td>";
+            }
+            output += "</tr>";
+        }
+        output += "</table>";
+        e.innerHTML = output;
+        document.f1.body_bg_col.value = body_bg;
+        document.f1.td_bg_col.value = bg_ini;
+        document.f1.std_bg_col.value = bg_sel;
+        document.f1.set_title.value = title;
+        document.f1.col_text.value = txt_col;
+        document.f1.col_title.value = title_col;
+
+        document.getElementById("titolo").innerHTML = title;
+        NextPremio();
+        NascondiMenu();
+        Saveconfig();
+    }
+
+    function Saveconfig() {
+        smorfie = document.f1.check_smorfia.checked;
+        title = document.f1.set_title.value;
+        txt_col = document.f1.col_text.value;
+        title_col = document.f1.col_title.value;
+        body_bg = document.f1.body_bg_col.value;
+        bg_ini = document.f1.td_bg_col.value;
+        bg_sel = document.f1.std_bg_col.value;
+        document.body.style.backgroundColor = body_bg;
+        var lol = document.getElementsByTagName("td");
+        for (i=0; i<lol.length; i++) {
+            if (lol[i].style.class != "uscito") {
+                lol[i].style.backgroundColor = bg_ini;
+            } else {
+                lol[i].style.backgroundColor = bg_sel
+            }
+        }
+        document.getElementById("titolo").innerHTML = title;
+        document.body.style.color = txt_col;
+        document.getElementById("titolo").style.color = title_col;
+    }
+
+    function ChangeColor(id) {
+        var e = document.getElementById(id);
+        if (e.style.backgroundColor != bg_sel) {
+            e.style.backgroundColor = bg_sel;
+            e.style.class = "uscito";
+            if (smorfie) {GetSmorfia(id);}
+            UltimoEstratto(id);
+        } else {
+            e.style.backgroundColor = bg_ini;
+            e.style.class = undefined;
+            e = document.getElementById('div_smorfie');
+            e.innerHTML = "";
+            e = document.getElementById('estratto');
+            e.innerHTML = "";
+        }
+    }
+    function NextPremio() {
+        var premi = new Array("Ambo", "Terna", "Quaterna", "Cinquina", "TOMBOLA!", "Tombolino");
+        e = document.getElementById("premio");
+        ip++;
+        if (premi.length <= ip) {
+            ip = 0;
+        }
+        e.innerHTML = "Premio corrente: <em>" + premi[ip] + "</em>";
+    }
+    function GetSmorfia(n) {
+        var xmlDocument = document.implementation.createDocument('', '', null);
+        xmlDocument.load("smorfie.xml");
+        function carica(){
+            var e = document.getElementById("div_smorfie");
+            e.innerHTML =  n + " - " + xmlDocument.documentElement.getElementsByTagName("smorfia")[n-1].firstChild.nodeValue;
+        }
+
+        xmlDocument.addEventListener('load', carica, false);
+        xmlDocument.load('smorfie.xml');
+
+    }
+
+    function UltimoEstratto(n) {
+        var e = document.getElementById("estratto");
+        e.innerHTML = "Ultimo numero estratto:<br /><em>" + n + "</em>";
+    }
+</script>

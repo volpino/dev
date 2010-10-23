@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <body onLoad='init();'>
+        <div id='Settings'>
+            <input id='CreateWin' type='button' value='New window' OnClick='NewWindow()' />
+        </div>
+    </body>
+</html>
+
+<style type="text/css">
+    /* STYLE CODE */
+    body {
+        background-color: #353535;
+        color: gray;
+    }
+    .Window {
+        background-color: black;
+        position: relative;
+        width: 400px;
+        height: 300px;
+        border:1px solid red;
+        cursor: default;
+    }
+    .WinHandler {
+        border-bottom: 1px solid red;
+        width: 100%;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+        behavior: url(ieUserSelectFix.htc);
+    }
+    .WinTitle {
+        text-align: center;
+        float: left;
+        width: 85%;
+        height: 100%;
+    }
+    .WinButtons {
+        text-align: right;
+    }
+    .WinContent {
+        height: 80%;
+    }
+    .ShellOutput {
+        height: 100%;
+    }
+    .InputCmd {
+    }
+    .StatusBar {
+        text-align: right;
+        width: 100%;
+    }
+    .ResizeWin {
+        text-align: right;
+    }
+</style>
+
+<script>
+    /* JAVASCRIPT CODE */
+    
+    //GLOBALS
+    var WinNumber = 0;
+    var offsetX;
+    var offsetY;
+    var coordX;
+    var coordY;
+    var currtarg;
+    var currhandler;
+
+    //MAIN FUNCTIONS
+    function init() {
+        NewWindow();
+
+        //dragging stuff
+	    document.onmousedown=startDrag;
+	    document.onmouseup=stopDrag;
+    }
+    function NewWindow() {
+        //addo una nuova finestra al body con i vari id
+        var a = '<div id=\'Win'+WinNumber+'\' class=\'Window\'>';
+        a    += '<div id=\'HW'+WinNumber+'\' class=\'WinHandler\'>';
+        a    += '<div id=\'WT'+WinNumber+'\' class=\'WinTitle\'>Shell '+ WinNumber +'</div>';
+        a    += '<div id=\'WB'+WinNumber+'\' class=\'WinButtons\'>|_|O|X|</div>';
+        a    += '</div><div id=\'WC'+WinNumber+'\' class=\'WinContent\'>';
+        a    += '<div id=\'SO'+WinNumber+'\'class=\'ShellOutput\'></div>';
+        a    += '<input id=\'IC'+WinNumber+'\' class=\'InputCmd\' type=\'text\' />';
+        a    += '<div id=\'SB'+WinNumber+'\' class=\'StatusBar\'><div id=\'RW'+WinNumber+'\' class=\'ResizeWin\'>/';
+        a    += '</div></div></div></div></div>';
+        document.body.innerHTML += a;
+        WinNumber++;
+    }
+
+    //DRAG AND DROP FUNCTIONS
+    function startDrag(e){
+	    e = e ? e : window.event; //cross-browser compatibility
+	    var targ = e.target ? e.target : e.srcElement;
+	    if (targ.className!='WinTitle')
+            return;
+        targ.style.cursor = 'move';
+        currhandler = targ;
+        var id = targ.id.split('WT')[1];
+        targ = document.getElementById('Win'+id);
+        currtarg = targ;
+        offsetX = e.clientX;
+        offsetY = e.clientY;
+	    if (!targ.style.left)
+            targ.style.left = '0px';
+	    if (!targ.style.top)
+            targ.style.top = '0px';
+        coordX = parseInt(targ.style.left);
+        coordY = parseInt(targ.style.top);
+        drag = true;
+        document.onmousemove = dragDiv;
+    }
+    function dragDiv(e){
+	    if (!drag) {
+            if (currhandler) 
+                currhandler.style.cursor = 'default';
+            return;
+        }
+        var movX =  coordX + e.clientX - offsetX;
+        var movY =  coordY + e.clientY - offsetY;
+        if (movY>-30) {
+  	        currtarg.style.left = movX + 'px';
+  	        currtarg.style.top = movY + 'px';
+        }
+    }
+    function stopDrag() {
+	    drag = false; 
+    }
+    
+    //RESIZE WIN FUNCTIONS
+    
+</script>
+
+<?php
+    /* PHP CODE */
+
+?>

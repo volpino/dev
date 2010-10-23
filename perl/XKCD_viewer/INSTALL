@@ -1,0 +1,20 @@
+XKCD viewer  INSTALL
+========================================================================
+
+tar xvf XKCD_viewer-0.1.tar.gz
+cd XKCD_viewer
+perl Makefile.PL
+make
+make install (as root)
+
+If you want to install it in your home directory or in another location:
+perl Makefile.PL INSTALL_BASE=~
+
+If you want to try the program run
+perl -I ./lib ./script/xkcd_viewer.pl
+
+Requirements:
+ * perl interpreter
+ * libwww-perl
+ * gtk2-perl
+ * Gtk2-Ex-SimpleList

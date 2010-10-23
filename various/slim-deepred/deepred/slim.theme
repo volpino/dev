@@ -1,0 +1,43 @@
+# DeepRed theme for slim
+# fox <fox91 at anche dot no>
+
+# Messages 
+msg_color               #FF0000
+msg_font                Terminus
+msg_shadow_xoffset 1
+msg_shadow_yoffset 1
+msg_shadow_color        #FF0000
+
+# Screen background style. Valid values: stretch, tile
+background_style        tile
+background_color        #000000
+# Input controls
+input_panel_x           5%
+input_panel_y           80%
+input_name_x            175
+input_name_y            137
+input_pass_x            175
+input_pass_y            196
+
+input_font          	Terminus
+input_color		        #FF0000
+input_bgcolor           #FF0000
+input_fgcolor           #FF0000
+
+# Welcome message
+welcome_font            Terminus:size=25
+welcome_color           #FF0000
+welcome_x               25
+welcome_y               55
+welcome_msg             %host login:
+
+username_msg            user:
+username_font           Terminus:size=18
+username_color		    #FF0000
+username_x              65
+username_y		        137
+
+password_msg		    pass:
+password_color	    	#FF0000
+password_x              65
+password_y              196

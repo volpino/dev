@@ -1,0 +1,23 @@
+Description
+________________________________________________________________________
+
+DeepRed is a dark Slim theme. Main colors are red and black.
+I've developed it in order to have a good login theme for DarkBlood
+fluxbox theme by cHoBi.
+I use 1280x800 so it works better at that resolution. If you have
+problems with other resolution fix it by editing input position in
+slim.theme or write me to have it fixed :P
+
+
+Install
+________________________________________________________________________
+
+- Untar the theme in /usr/share/slim/themes/
+- Edit /etc/slim.conf like these examples:
+      current_theme       deepred
+  or, if you want to use a random theme use comma-separated theme names
+      current_theme       deepred,flat,default
+
+I hope you like it!
+
+/fox/ <fox91 at anche dot no>

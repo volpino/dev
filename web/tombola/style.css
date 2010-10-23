@@ -1,0 +1,69 @@
+body {
+    background-color: #FFFFFF;
+    color: #000000;
+    font : 20px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+td {
+    background-color: #FFFFFF;
+}
+
+#testa {
+    text-align: center;
+    margin: 10px;
+}
+#titolo {
+    font-size: 30px;
+}
+#config {
+    float: right;
+    text-align: right;
+    font-size: 10px;
+}
+#config img {
+    height: 16px;
+    width: 16px;
+}
+#menu_config {
+    font-size: 10px;
+    width: 150px;
+}
+#estratto {
+    float: left;
+    padding-top: 18%;
+    font-size: 24px;
+}
+#estratto em {
+    font-size: 45px;
+}
+
+#tabellone {
+    font-size: 35px;
+    text-align: center;
+    margin-left: 29%;
+    margin-right: 29%;
+    padding: 20px;
+}
+#div_smorfie {
+    float: right;
+    padding-right: 20px;
+    padding-top: 10px;
+    font-size: 30px;
+}
+table {
+    text-align: center;
+}
+td {
+    border: 1px solid black;
+}
+tr {
+    border: 1px solid black;
+}
+em {
+    font-size: 30px;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+}
+

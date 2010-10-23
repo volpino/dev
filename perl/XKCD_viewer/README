@@ -1,0 +1,45 @@
+XKCD viewer - Simple GTK front-end for xkcd.com
+=======================================================
+
+DESCRIPTION
+
+Using this program you can easily enjoy xkcd comics by
+Randall Munroe without any browser, simply using this
+graphical front-end.
+
+Features:
+
+  * xkcd.com like buttons (prev, next, random, ...)
+  * search function
+  * get direct links easily
+  * copy links to clipboard
+  * save comics on your pc
+  * insert your own comic id / url
+  * tooltip with comic description (browser like)
+  * key bindings
+  * alert when there are new comics
+  
+
+Key Bindings
+  
+  Keys                      Action
+------------------------------------------
+  Right-arrow               Next comic
+  k                         Next comic
+  Left-arrow                Previous comic
+  j                         Previous comic
+  r                         Random comic
+  Q                         Quit
+  
+  
+COPYRIGHT
+
+This program is free software and is distributed
+under the terms of the GPL v.3
+
+Copyleft 2008 fox
+
+AUTHOR
+
+fox <fox91[at]anche[dot]no>
+If you find bugs please write me! :D
