@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>WPA Tester</title>
+        <meta name="generator" content="vim" />
+        <meta name="author" content="fox - fox91@anche.no"/>
+        <meta name="viewport" content="user-scalable=no, width=device-width" />
+        <script src="md5.js"></script>
+        <script src="bin.js"></script>
+        <script src="wpa.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+    <body>
+        <div id="header">
+            <h1>WPA Tester</h1>
+        </div>
+        <div id="container">
+            <select id="type">
+                <option value="fpirelli">Fastweb Pirelli</option>
+                <option value="ftesley">Fastweb Tesley</option>
+                <option value="alice_agpf">Alice AGPF</option>
+                <option value="alice_aga">Alice AGA</option>
+            </select>
+            <label for="ssid">ESSID:</label>
+            <input name="ssid" id="ssid" type="text" />
+            <input id="start" type="button" value="Get WPA" onClick="calculate();" />
+            <div>
+                <p>NOTE:</p>
+                <p>
+                    <ul>
+                        <li>Fastweb Pirelli: FASTWEB-1-001CA2xxxxxx o FASTWEB-1-001DBXxxxxxx</li>
+                        <li>Fastweb Tesley: FASTWEB-1-00036Fxxxxxx o FASTWEB-1-002196xxxxxx</li>
+                        <li>Alice AGPF</li>
+                        <li>Alice AGA</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>
+
